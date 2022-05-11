@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'branch_id',
     ];
 
     /**
@@ -41,4 +42,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    function to_branch(){
+        
+        return $this->belongsTo(\App\Models\Branchname::class, 'resource_id', 'id');
+    }
 }

@@ -20,6 +20,12 @@ Route::get('', function () {
 Route::get('/yorsaeng/index', 'App\Http\Controllers\FangController@index');
 Route::get('/yorsaeng/create', 'App\Http\Controllers\FangController@create');
 Route::post('/yorsaeng/store', 'App\Http\Controllers\FangController@store');
-Route::post('/yorsaeng/delete{name}', 'App\Http\Controllers\FangController@delete');
-Route::post('/yorsaeng/update{name}', 'App\Http\Controllers\FangController@update');
+Route::post('/yorsaeng/delete/{name}', 'App\Http\Controllers\FangController@delete');
+Route::post('/yorsaeng/update/{name}', 'App\Http\Controllers\FangController@update');
+
+Route::get('/branchname', 'App\Http\Controllers\BrnchNameController@create');
+Route::get('/usertobranch/select_branch', 'App\Http\Controllers\UsertobranchController@select_branch');
+Route::post('/usertobranch/store', 'App\Http\Controllers\UsertobranchController@store');
+
+
 

@@ -34,6 +34,7 @@ class FangController extends Controller
     }
     public function index()
     {      
+        
         $fangs = Fang::get();
         return view('index', compact('fangs'));
     }
@@ -59,5 +60,6 @@ class FangController extends Controller
         $name->photo = $file;
         $name->update();
         return back();
+
     }
 }

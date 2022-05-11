@@ -147,102 +147,46 @@
 </head>
 
 <body>
+
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-               
-                @foreach ($fangs as $fang)
-                <div class="col-md-3">
-                    <!-- Profile Image -->
-                    <div class="card card-primary card-outline">
-                        <div class="card-body box-profile">
-                            <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="/storage/{{ $fang->photo }}" alt="User profile picture">
+            <!-- SELECT2 EXAMPLE -->
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">เลือกสาขา</h3>
+                </div>
+                <form action="/usertobranch/store" method="post" enctype="multipart/form-data">
+                     @csrf
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <!-- select -->
+                            <div class="form-group">
+                                <label>ชื่อ</label>
+                                <select class="form-control" name="name" id="name">
+                                    @foreach ( $fangs as $fang )
+                                    <option value="{{$fang->id}}">{{ $fang->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <h3 class="profile-username text-center">{{ $fang->name }} 
-                                @foreach ($fang->to_branchs as $to_branch)
-                                {{ $to_branch->branch->name }}
-                                @endforeach
-                            </h3>
-                            <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    <b>{{ $fang->name }}</b>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>{{ $fang->age }}</b>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>{{ $fang->nickName }}</b>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>{{ $fang->phone }}</b>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#staticBackdrop">
-                                แก้ไข
-                            </button>
-                            <form action="/yorsaeng/delete{{$fang->id}}" method="post" onsubmit="return confirm('ลบหรือไม่ ?')">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-block"><b>ลบ</b></button>
-                            </form>
                         </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <div class="card ">
-                                            <form action="/yorsaeng/update{{$fang->id}}" method="post" enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="card-body box-profile">
-                                                    <div class="col-auto">
-                                                        <label>รุปภาพ</label>
-                                                        <input class="form-control" type="file" name="photo" multiple>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <label for="fang_name" class="col-form-label">ชื่อ</label>
-                                                        &nbsp; &nbsp;
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <input type="text" name="name" id="" class="form-control" aria-describedby="" value="{{ $fang->name }}">
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <label for="fang_age" class="col-form-label">อายุ</label>
-                                                        &nbsp; &nbsp;
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <input type="number" name="age" id="" class="form-control" aria-describedby="" value="{{ $fang->age }}">
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <label for="fang_nickName" class="col-form-label">ชื่อเล่น</label>
-                                                        &nbsp; &nbsp;
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <input type="text" name="nickName" id="" class="form-control" aria-describedby="" value="{{ $fang->nickName }}">
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <label for="fang_phone" class="col-form-label">เบอร์โทร</label>
-                                                        <input type="text" name="phone" id="" class="form-control" aria-describedby="" value="{{ $fang->phone }}">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                                                        <button type="summit" class="btn btn-success">บันทึก</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>สาขา</label>
+                                <select class="form-control" name="branch" id="branch">
+                                    @foreach ( $branchs as $branch )
+                                    <option  value= "{{$branch->id}}">{{ $branch->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            
                         </div>
                     </div>
-                </div>
-                @endforeach
+                    <button type="submit" class="btn btn-block btn-primary">Primary</button>
+                </form>
             </div>
         </div>
     </section>
+
+
 
     <!-- jQuery -->
     <script src="https://taweechai-bucket.s3-ap-southeast-1.amazonaws.com/upvc/admin/plugins/jquery/jquery.min.js"></script>
